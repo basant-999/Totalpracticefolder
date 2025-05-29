@@ -1,0 +1,16 @@
+#mainDiv{
+    height:200px;
+    width:400px;
+    background-color:gray;
+    align-items:center;
+    display:flex ;
+    justify-content:center ;
+    margin:auto
+}
+#Btn{
+    border: none;
+}
+#showNum{
+    margin: 20px;
+    padding: 10px 20px;
+}
