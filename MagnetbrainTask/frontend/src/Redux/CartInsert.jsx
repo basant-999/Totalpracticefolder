@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CartInsert = () => {
   const cart = useSelector(state => state.addtocart.cart);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate()
 

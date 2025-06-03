@@ -12,6 +12,25 @@ const Home = () => {
 
   const dispatch = useDispatch()
 
+  // user Authentication=====================
+  const userAuthentication=async()=>{
+        try {
+                const token = localStorage.getItem("token")
+            if(token){
+              let api = `${Base_url}/user/userauthentication`
+              const response = await axios.get(api,{
+                headers:{
+                  Authorization:`Bearer ${token}`
+                }
+              })
+              // console.log(response.data)
+              localStorage.setItem("userName",response.data.name)
+            }
+        } catch (error) {
+           console.log(error)
+        }
+  }
+ 
   const loadData=async()=>{
      let api = `${Base_url}/admin/dispaydata`
      try {
@@ -23,9 +42,14 @@ const Home = () => {
       console.log(error)
      }
   }
+  const handleUserCart=async(p)=>{
+    
+    await axios.post(`${Base_url}/user/CartItems`,{CartId:p,UserId:localStorage.getItem("UserId")})
+  }
 
   useEffect(()=>{
     loadData()
+    userAuthentication()
   },[])
 
    const ans = getdata.map((key)=>{
@@ -44,7 +68,7 @@ const Home = () => {
           <strong>Brand:</strong> {key.brand}
         </Card.Text>
       </Card.Body>
-         <Button variant="success" type='button' onClick={()=>dispatch(addtocart({...key,quanty:1}))}>Addtocart</Button>
+         <Button variant="success" type='button' onClick={()=>{dispatch(addtocart({...key,quanty:1})),handleUserCart(key._id)}}>Addtocart</Button>
     </Card>
              </>)
    })

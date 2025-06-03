@@ -13,6 +13,8 @@ import CartInsert from './Redux/CartInsert'
 import Checkout from './Redux/Checkout'
 import Success from './Redux/Suceess'
 import Cancel from './Redux/Cancel'
+import Sinup from './Pages/Sinup'
+
 
 function App() {
  
@@ -26,6 +28,7 @@ function App() {
              <Route path='home' element={<Home/>}/>
              <Route path='about' element={<About/>}/>
              <Route path='contact' element={<Contact/>}/>
+           
              </Route>
          </Routes>
 
@@ -43,6 +46,11 @@ function App() {
             <Route path='success' element={<Success/>}/>
             <Route path='cancel' element={<Cancel/>}/>
          </Routes>
+
+         <Routes>
+            <Route path='signup' element={<Sinup/>}/>
+         </Routes>
+
       </BrowserRouter>
     </>
   )

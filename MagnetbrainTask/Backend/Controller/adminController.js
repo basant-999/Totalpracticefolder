@@ -4,10 +4,10 @@ const Insetmodel = require("../Model/InsertModel")
 const Ordermodel = require("../Model/orderModel")
 const AdminLogin=async(req,res)=>{
        const{ Password, Email } = req.body
-       console.log(req.body)
+      //  console.log(req.body)
       try {
          const mydata = await Adminmodel.findOne({Email:Email})
-         console.log(mydata)
+        //  console.log(mydata)
          if(!mydata){
             return res.status(404).send({msg:"invalid email"})
          }
@@ -16,7 +16,7 @@ const AdminLogin=async(req,res)=>{
               return res.status(401).send({msg:"invalid password"})
          }
         
-           res.status(200).send({msg:"sucessfully login",mydata})
+           res.status(200).send({msg:"sucessfully login",adminid:mydata._id,adminName:mydata.name})
       } catch (error) {
         // console.log(error)
         res.status(400).send({msg:"server error"})

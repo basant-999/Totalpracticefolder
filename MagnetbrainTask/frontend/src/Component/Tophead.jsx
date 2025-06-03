@@ -18,6 +18,7 @@ const Tophead = () => {
           try {
              const response = await axios.post(api,{Password:Password,Email:Email})
              console.log(response.data)
+             localStorage.setItem("AdminName",response.data.adminName)
              alert(response.data.msg)
              navigate("admindashboard")
           } catch (error) {
