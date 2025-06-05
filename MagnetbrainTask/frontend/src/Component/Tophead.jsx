@@ -28,7 +28,7 @@ const Tophead = () => {
       }
   return (
    <>
-       <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+       <nav className="navbar navbar-expand-lg navbar-dark bg-secondary py-3">
       <div className="container">
         {/* Logo/Brand */}
         <a className="navbar-brand text-warning fw-bold" href="#">

@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Base_url from '../Config/Base_url';
+import axios from 'axios';
 
 const Contact = () => {
+  const [mydata,Setmydata] = useState({
+    name:"",email:"",message:""
+  })
+   const handlesubmit=(e)=>{
+       let name = e.target.name;
+       let value = e.target.value
+       Setmydata(val=>({...val,[name]:value}))
+      //  console.log(mydata)
+   }
+
+    const finalSubmit=async(e)=>{
+        e.preventDefault();
+        let api = `${Base_url}/contact/usercontact`
+        try {
+          const response = await axios.post(api,mydata)
+          // console.log(response.data)
+          alert(response.data.msg)
+          Setmydata({name:"",email:"",message:""})
+        } catch (error) {
+          // console.log(error)
+          alert(error.response.data.msg)
+        }
+    }
   return (
    <>
       <div style={{width:"500px", margin:"auto" ,border:"2px solid yellow", height:"700px"}}>
@@ -12,24 +37,24 @@ const Contact = () => {
           <label htmlFor="name" className="form-label text-white">
             Name
           </label>
-          <input type="text" className="form-control" id="name" placeholder="Your Name" />
+          <input type="text" className="form-control" id="name" placeholder="Your Name" name='name' value={mydata.name} onChange={handlesubmit} />
         </div>
 
         <div className="mb-3">
           <label htmlFor="email" className="form-label text-white">
             Email address
           </label>
-          <input type="email" className="form-control" id="email" placeholder="name@example.com" />
+          <input type="email" className="form-control" id="email" placeholder="Enter your email" name='email' value={mydata.email}  onChange={handlesubmit} />
         </div>
 
         <div className="mb-3">
           <label htmlFor="message" className="form-label text-white">
             Message
           </label>
-          <textarea className="form-control" id="message" rows="4" placeholder="Your message here..."></textarea>
+          <textarea className="form-control" id="message" rows="4" placeholder="Your message here..." value={mydata.message} name='message' onChange={handlesubmit}></textarea>
         </div>
 
-        <button type="submit" className="btn btn-warning">
+        <button type="submit" className="btn btn-warning" onClick={finalSubmit}>
           Send Message
         </button>
       </form>

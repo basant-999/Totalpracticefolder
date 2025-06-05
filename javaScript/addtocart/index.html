@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <style>
+    body {
+      font-family: Arial;
+      margin: 30px;
+    }
+    .product {
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin-bottom: 10px;
+      width: 250px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    #cartItems {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px dashed gray;
+    }
+  </style>
+</head>
+<body>
+    
+    <h1>🛍️ My Shop</h1>
+
+  <div class="product">
+    <h3>Product 1</h3>
+    <p>Price: ₹100</p>
+    <button onclick="addToCart(1, 'Product 1', 100)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <h3>Product 2</h3>
+    <p>Price: ₹200</p>
+    <button onclick="addToCart(2, 'Product 2', 200)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <h3>Product 3</h3>
+    <p>Price: ₹150</p>
+    <button onclick="addToCart(3, 'Product 3', 150)">Add to Cart</button>
+  </div>
+
+  <h2>🛒 Your Cart</h2>
+  <ul id="cartItems"></ul>
+
+  <script src="./index.js"></script>
+
+</body>
+</html>

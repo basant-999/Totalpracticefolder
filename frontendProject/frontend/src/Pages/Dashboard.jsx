@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div style={{display:"flex"}}>
          <div>
                
-                <Button variant="primary" onClick={()=>{navigate("edit")}}>Edit</Button> <br /> <br />
+               
                 <Button variant="secondary" onClick={()=>{navigate("display")}}>Display</Button> <br /> <br />
                  <Button variant="success" onClick={()=>{navigate("insert")}}>Insert</Button>
          </div>

@@ -5,6 +5,7 @@ import { Card } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { addtocart } from '../Redux/CardSlice';
 import { useDispatch } from "react-redux";
+import "../css/home.css"
 
 
 const Home = () => {
@@ -24,7 +25,7 @@ const Home = () => {
                 }
               })
               // console.log(response.data)
-              localStorage.setItem("userName",response.data.name)
+              // localStorage.setItem("userName",response.data.name)
             }
         } catch (error) {
            console.log(error)
@@ -35,7 +36,7 @@ const Home = () => {
      let api = `${Base_url}/admin/dispaydata`
      try {
         const response = await axios.get(api)
-        console.log(response.data)
+        // console.log(response.data)
         Setgetdata(response.data)
         // console.log(getdata)
      } catch (error) {
@@ -74,7 +75,10 @@ const Home = () => {
    })
   return (
      <>
-        {ans}
+       <div id='homecard'>
+            {ans}
+       </div>
+       
      </>
   )
 }

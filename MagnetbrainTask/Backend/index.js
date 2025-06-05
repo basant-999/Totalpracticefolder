@@ -7,6 +7,7 @@ const cors = require("cors")
 const AdminRoute = require("./Route/adminRoute")
 const Paymentroute = require("./Route/paymentRoute")
 const UserRoute = require("./Route/userRoute")
+const ContactRoute = require("./Route/contactRoute")
 const path = require("path")
 
 
@@ -25,6 +26,7 @@ mongoose.connect(process.env.DB_URl).then(()=>{
 app.use("/admin",AdminRoute)
 app.use("/payment",Paymentroute)
 app.use("/user",UserRoute)
+app.use("/contact",ContactRoute)
 
 const port = 8080
 app.listen(port,()=>{

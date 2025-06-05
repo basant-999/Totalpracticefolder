@@ -5,35 +5,50 @@ import { Modal, Button ,Form } from 'react-bootstrap';
 import Base_url from "../Config/Base_url";
 import axios from "axios";
 import { MdMyLocation } from "react-icons/md";
+import {useSelector,useDispatch} from "react-redux";
+import { setUserName } from "../Redux/CardSlice";
+
 const SecondTop = () => {
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
-  const navigate = useNavigate()
-       const [show, setShow] = useState(false);
+      const [email,setEmail] = useState("")
+      const [password,setPassword] = useState("")
+      const navigate = useNavigate()
 
-       const handleClose = () => setShow(false);
-       const handleShow = () => setShow(true);
+      const [show, setShow] = useState(false);
 
-       const finalsubmit=async(e)=>{
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+
+      let dispatch = useDispatch();
+      let userName = useSelector(state => state.addtocart.username);
+
+      const finalsubmit=async(e)=>{
          e.preventDefault();
         try {
           let api = `${Base_url}/user/userlogin`
           const response = await axios.post(api,{email,password})
-          console.log(response.data)
+          // console.log(response.data)
           localStorage.setItem("token",response.data.token)
           localStorage.setItem("UserId",response.data.user._id)
+          dispatch(setUserName(response.data.user.name))
           alert(response.data.msg)
         } catch (error) {
           console.log(error)
           alert(error.response.data.msg)
         }
+      }
+       
+       const logoutpage=()=>{
+        localStorage.clear()
+        dispatch(setUserName(""));
        }
+
   return (
    <>
      
          <nav className="navbar navbar-dark bg-dark px-4 py-3">
       <a className="navbar-brand text-warning fw-bold ps-4" href="#">
-        <MdMyLocation /> {localStorage.getItem("userName")}
+        <MdMyLocation /> {userName}
+        
       </a>
 
       <div className="d-flex align-items-center">
@@ -41,8 +56,12 @@ const SecondTop = () => {
         <button className="btn btn-outline-light btn-sm me-2" onClick={handleShow} >
          User-Login
         </button>
-        <button className="btn btn-warning btn-sm" onClick={()=>navigate("signup")} >
+        <button className="btn btn-warning btn-sm me-2" onClick={()=>navigate("signup")} >
           Signup
+        </button>
+
+           <button className="btn btn-danger btn-sm " onClick={logoutpage}  >
+          logout
         </button>
 
        

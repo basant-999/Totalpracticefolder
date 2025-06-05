@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const Cardslice = createSlice({
      name:"addtocart",
      initialState:{
-          cart:[]
+          cart:[],
+          username:"",
      },
      reducers:{
           addtocart:(state,action)=>{
@@ -29,9 +30,13 @@ const Cardslice = createSlice({
           },
           removefromcart:(state,action)=>{
                state.cart = state.cart.filter(item=>item._id !==action.payload)
+          },
+          setUserName:(state,action)=>{
+               state.username=action.payload;
+               // console.log(action.payload);
           }
      }
 })
 
-export const{addtocart,incrementqut,dicrementqut,removefromcart}= Cardslice.actions
+export const{addtocart,incrementqut,dicrementqut,removefromcart,setUserName}= Cardslice.actions
 export default Cardslice.reducer

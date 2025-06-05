@@ -1,21 +1,10 @@
 {
   "student": [
     {
-      "id": "0da9",
-      "name": "js",
-      "tasktype": "work",
-      "status": "uncheck"
-    },
-    {
-      "id": "be2d",
-      "name": "js",
-      "tasktype": "important",
-      "status": "uncheck"
-    },
-    {
       "id": "32d1",
       "name": "js",
-      "tasktype": "important"
+      "tasktype": "important",
+      "status": "check"
     },
     {
       "id": "3e9e",
@@ -30,10 +19,10 @@
       "status": "check"
     },
     {
-      "id": "7074",
-      "name": "js",
+      "id": "1e27",
+      "name": "sanju",
       "tasktype": "urgent",
-      "status": "check"
+      "status": "uncheck"
     }
   ]
 }
