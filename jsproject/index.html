@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Product App</title>
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 20px; }
+    .item { border: 1px solid black; padding: 10px; }
+    .cart { margin-top: 20px; border-top: 2px solid #000; padding-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>🛍️ Products</h2>
+
+  <input id="search" placeholder="Search..." />
+  <select id="sort">
+    <option value="">Sort</option>
+    <option value="asc">Low to High</option>
+    <option value="desc">High to Low</option>
+  </select>
+
+  <select id="color"><option value="">All Colors</option></select>
+  <select id="brand"><option value="">All Brands</option></select>
+
+  <div id="list" class="grid"></div>
+  <div id="pagination"></div>
+
+  <div class="cart">
+    <h3>🛒 Cart</h3>
+    <ul id="cartList"></ul>
+  </div>
+
+  <script>
+    const api = "https://mocki.io/v1/10512a17-105f-435d-a920-dce1478345bd";
+    let data = [], cart = [], page = 1, perPage = 5;
+
+    async function load() {
+      const res = await fetch(api);
+      data = await res.json();
+      fillDropdowns();
+      update();
+    }
+
+    function fillDropdowns() {
+      const colors = [...new Set(data.map(p => p.color))];
+      const brands = [...new Set(data.map(p => p.brandName))];
+
+      colors.forEach(c => color.innerHTML += `<option>${c}</option>`);
+      brands.forEach(b => brand.innerHTML += `<option>${b}</option>`);
+    }
+
+    function update() {
+      let filtered = [...data];
+
+      const q = search.value.toLowerCase();
+      if (q) filtered = filtered.filter(p =>
+        p.productName.toLowerCase().includes(q) || p.brandName.toLowerCase().includes(q)
+      );
+
+      if (color.value) filtered = filtered.filter(p => p.color === color.value);
+      if (brand.value) filtered = filtered.filter(p => p.brandName === brand.value);
+
+      if (sort.value === 'asc') filtered.sort((a, b) => a.price - b.price);
+      if (sort.value === 'desc') filtered.sort((a, b) => b.price - a.price);
+
+      const start = (page - 1) * perPage;
+      const end = start + perPage;
+      const show = filtered.slice(start, end);
+
+      list.innerHTML = '';
+      show.forEach(p => {
+        list.innerHTML += `
+          <div class="item">
+            <h4>${p.productName}</h4>
+            <p>${p.brandName}</p>
+            <p>₹${p.price}</p>
+            <p>${p.color}</p>
+            <button onclick="addCart('${p.productName}')">Add</button>
+          </div>
+        `;
+      });
+
+      renderPagination(Math.ceil(filtered.length / perPage));
+    }
+
+    function renderPagination(totalPages) {
+      pagination.innerHTML = '';
+      for (let i = 1; i <= totalPages && i <= 4; i++) {
+        pagination.innerHTML += `<button onclick="page=${i};update()">${i}</button> `;
+      }
+    }
+
+    function addCart(name) {
+      cart.push(name);
+      cartList.innerHTML = cart.map(c => `<li>${c}</li>`).join('');
+    }
+
+    search.oninput = sort.onchange = color.onchange = brand.onchange = () => {
+      page = 1;
+      update();
+    };
+
+    load();
+  </script>
+</body>
+</html>

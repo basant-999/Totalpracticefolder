@@ -1,0 +1,10 @@
+const express = require("express")
+const route = express.Router()
+const userController = require("../controller/userCont")
+route.post("/insert",userController.Insert)
+route.get("/display",userController.Display)
+route.get("/delete",userController.Delete)
+route.post("/editshow",userController.Editshow)
+route.post("/editsave",userController.Editsave)
+route.post("/search",userController.Search)
+module.exports = route

@@ -1,0 +1,16 @@
+#addbooktable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#addbooktable th,
+#addbooktable td {
+  border: 2px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+#addbook{
+  margin-top: 20px;
+  
+}

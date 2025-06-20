@@ -17,6 +17,7 @@ const App = () => {
 
        const finalsubmit=()=>{
             // duplicate insert n ho
+            
             const dupli = getmydata.some((item)=>{
                  return(
                    
@@ -83,6 +84,7 @@ const App = () => {
                     <td style={{textDecoration:key.status == "check" ? "line-through" :"none"}}> {key.name} </td>
                     <td style={{textDecoration:key.status == "check" ? "line-through" :"none"}}>  {key.tasktype}</td>
                     <td><HiArchiveBoxXMark onClick={()=>mydelete(key.id)} /></td>
+       
                 </tr>
                 
               </>
