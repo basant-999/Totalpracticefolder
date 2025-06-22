@@ -1,5 +1,5 @@
    const Storemodel = require("../model/Storemodel")
-
+   const Storeinsert = require("../model/Storeinsert")
  const Storesignup=async(req,res)=>{
     //    console.log(req.body)
     const { ownerName, storeName, address,password,email}  = req.body
@@ -42,7 +42,42 @@ const Storelogin=async(req,res)=>{
 
 }
 
+ const Insertstore=async(req,res)=>{
+      console.log(req.files,"file")
+      console.log(req.body,"body")
+      const{storename,location,variety} = req.body
+      const imagePaths = req.files.map(file => "pictures/" + file.filename);
+      console.log(imagePaths);
+      try {
+             const result = await  Storeinsert.create({
+                   storename:storename,
+                  location:location,
+                  variety:variety,
+                  defaultimage:imagePaths[0],
+                  image:imagePaths
+           })
+
+           res.status(200).send({msg:"create strore",result})
+      } catch (error) {
+         console.log(error)
+      }
+    
+ }
+
+
+ const Getstoredata=async(req,res)=>{
+      try {
+         const respo = await Storeinsert.find()
+         // console.log(respo)
+         res.status(200).send(respo)
+      } catch (error) {
+         console.log(error)
+      }
+ }
+
  module.exports = {
     Storesignup,
-    Storelogin
+    Storelogin,
+    Insertstore,
+    Getstoredata
  }

@@ -10,7 +10,7 @@ const { default: mongoose } = require("mongoose");
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/pictures', express.static(path.join(__dirname, 'middleware/pictures')));
 
 const db = process.env.DB_URL
 mongoose.connect(db).then(()=>{
