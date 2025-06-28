@@ -5,6 +5,7 @@ const app = express()
 const cors = require("cors")
 const path = require("path");
 const StoreRoute = require("./route/StoreRoute");
+const UserRoute = require("./route/userRoute")
 const { default: mongoose } = require("mongoose");
 
 app.use(cors())
@@ -18,6 +19,7 @@ mongoose.connect(db).then(()=>{
 })
 
 app.use("/store",StoreRoute)
+app.use("/user",UserRoute)
 const port = process.env.PORT
 
 app.listen(port,()=>{
