@@ -1,10 +1,20 @@
-const express = require ("express")
-const route = express.Router()
-const StoreController = require("../controller/Storecon")
-const upload = require("../middleware/multer")
+const express = require("express");
+const route = express.Router();
+const StoreController = require("../controller/Storecon");
+const upload = require("../middleware/multer");
 
-route.post("/storesignup",StoreController.Storesignup)
-route.post("/storelogin",StoreController.Storelogin)
-route.post("/insertstore",upload.array("pictures",5),StoreController.Insertstore)
-route.get("/getstoredata",StoreController.Getstoredata)
-module.exports = route
+// Store Signup
+route.post("/storesignup", StoreController.Storesignup);
+
+// Store Login
+route.post("/storelogin", StoreController.Storelogin);
+
+// Insert Store (with image upload)
+route.post("/insertstore", upload.array("store", 5), StoreController.Insertstore);
+
+// Get All Store Data
+route.get("/getstoredata", StoreController.Getstoredata);
+
+route.post("/storeproduct",upload.array("product",5),StoreController.Storeproduct)
+
+module.exports = route;

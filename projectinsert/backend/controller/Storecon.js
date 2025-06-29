@@ -46,7 +46,7 @@ const Storelogin=async(req,res)=>{
       console.log(req.files,"file")
       console.log(req.body,"body")
       const{storename,location,variety} = req.body
-      const imagePaths = req.files.map(file => "pictures/" + file.filename);
+      const imagePaths = req.files.map(file => "storeimages/" + file.filename);
       console.log(imagePaths);
       try {
              const result = await  Storeinsert.create({
@@ -75,9 +75,17 @@ const Storelogin=async(req,res)=>{
       }
  }
 
+ const Storeproduct=async(req,res)=>{
+   console.log(req.files)
+   console.log(req.body)
+   res.send("bbbbbbbbbbbbbbbbbbbbb")
+
+ }
+
  module.exports = {
     Storesignup,
     Storelogin,
     Insertstore,
-    Getstoredata
+    Getstoredata,
+    Storeproduct
  }

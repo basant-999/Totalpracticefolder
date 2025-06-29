@@ -31,7 +31,7 @@ const finalsubmit=async(e)=>{
       }
 
       for(let i=0; i<image.length;i++){
-        formdata.append("pictures",image[i])
+        formdata.append("store",image[i])
       }
 
     let api = `${Base_url}store/insertstore`
@@ -108,7 +108,7 @@ const finalsubmit=async(e)=>{
                   <label className="form-label">Image</label>
                   <input
                     type="file" multiple
-                    name="pictures"
+                    name="store"
                     onChange={handleimage}
                     className="form-control"
                     accept="image/*"

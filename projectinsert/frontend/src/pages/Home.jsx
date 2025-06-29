@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Base_url from '../Base_url'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -36,7 +37,7 @@ const Home = () => {
       <h5 className="card-title">{store.storename}</h5>
       <p className="card-text"><strong>Location:</strong> {store.location}</p>
       <p className="card-text"><strong>Variety:</strong> {store.variety}</p>
-      <a href="#" className="btn btn-primary w-100">View More</a>
+      <Link to={`/storedetails/${store._id}`} className="btn btn-primary w-100">view store</Link>
     </div>
   </div>
 </div>

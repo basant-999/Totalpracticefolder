@@ -15,7 +15,7 @@ const Layout = () => {
 
   const product = useSelector(state=>state.addtocart.cart)
   // console.log(product)
-  const pro = product.lenght
+  const pro = product.length
   const [showSignup, setShowSignup] = useState(false); // modal state
   const [formData, setFormData] = useState({
     username: '',

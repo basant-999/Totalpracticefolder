@@ -1,40 +1,45 @@
-const multer = require("multer")
-const path = require("path")
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
+// Dynamic destination based on request path
 const storageConfig = multer.diskStorage({
-  // destination is uploads folder under the project directory
-  destination: path.join(__dirname, "pictures"),
-  filename: (req, file, cb) => {
-    // file name is prepended with current time in milliseconds to handle duplicate file names
-    cb(null, Date.now() + "-" + file.originalname);
+  destination: function (req, file, cb) {
+    let folderPath = "public/uploads"; // default fallback
+
+    if (req.baseUrl.includes("store")) {
+      folderPath = "public/storeimages";
+    } else if (req.baseUrl.includes("product")) {
+      folderPath = "public/productimages";
+    }
+
+    // ✅ create folder if not exists
+    fs.mkdirSync(folderPath, { recursive: true });
+
+    cb(null, folderPath);
   },
+
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + "-" + file.originalname;
+    cb(null, uniqueName);
+  }
 });
 
-// file filter for filtering only images
-const fileFilterConfig = function(req, file, cb) {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png/jpg/jpeg") {
-    // calling callback with true as mimetype of file is image
-    cb(null, true);
+// ✅ Corrected fileFilter
+const fileFilterConfig = function (req, file, cb) {
+  if (file.mimetype.startsWith("image/")) {
+    cb(null, true); // allow
   } else {
-    // false to indicate not to store the file
-    cb(null, false);
+    cb(new Error("Only images allowed"), false); // reject
   }
 };
 
-// creating multer object for storing with configuration
 const upload = multer({
-  // applying storage and file filter
   storage: storageConfig,
   limits: {
-    // limits file size to 5 MB
-    fileSize: 1024 * 1024 * 5
+    fileSize: 1024 * 1024 * 5 // 5 MB
   },
-  fileFilter: fileFilterConfig,
+  fileFilter: fileFilterConfig
 });
 
 module.exports = upload;
-
-
-
-
-

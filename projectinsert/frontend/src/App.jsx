@@ -11,6 +11,8 @@ import Reviews from './StoreOwner/Reviews'
 import AvgRating from './StoreOwner/AvgRating'
 import Storelogin from './StoreOwner/Storelogin'
 import Storesignup from './StoreOwner/Storesignup'
+import StoreDetails from './pages/StoreDetails'
+import StoreProducts from './StoreOwner/StoreProducts'
 function App() {
 
   return (
@@ -23,6 +25,7 @@ function App() {
                     <Route path="home" element={<Home/>}/>
                     <Route path="insert" element={<Inser/>}/>
                     <Route path="display" element={<Display/>}/>
+                    <Route path='storedetails/:id' element={<StoreDetails/>}/>
                     
              </Route>
         </Routes>
@@ -32,6 +35,7 @@ function App() {
                 <Route path='insert' element={<InsertStore/>}/>
                 <Route path='reviews' element={<Reviews/>}/>
                 <Route path='avgrating' element={<AvgRating/>}/>
+                <Route path='storeproducts' element={<StoreProducts/>}/>
              </Route>
         </Routes>
 
