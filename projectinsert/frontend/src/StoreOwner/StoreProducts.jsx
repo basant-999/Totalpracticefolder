@@ -8,6 +8,7 @@ const StoreProducts = () => {
     name: '',
     price: '',
     description: '',
+    StoreId:localStorage.getItem("SId")
   });
 
   const handleImageChange = (e) => {
@@ -40,9 +41,10 @@ const StoreProducts = () => {
     }
 
     const api = `${Base_url}store/storeproduct`;
+    
 
     try {
-      const response = await axios.post(api, formDataToSend, {
+      const response = await axios.post(api, formDataToSend , {
         headers: {
           "Content-Type": "multipart/form-data"
         }

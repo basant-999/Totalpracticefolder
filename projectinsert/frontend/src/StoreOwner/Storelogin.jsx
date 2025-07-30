@@ -22,6 +22,7 @@ const Storelogin = () => {
     try {
         const repo = await axios.post(api,loginData)
         // console.log(repo.data)
+        localStorage.setItem("SId",repo.data.data)
         alert(repo.data.msg)
         navigate("/storedashboard")
     } catch (error) {

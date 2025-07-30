@@ -6,13 +6,13 @@ import Home from './pages/Home'
 import {BrowserRouter,Route,Routes} from "react-router-dom"
 import Inser from './pages/Inser'
 import StoreAdmin from './StoreOwner/StoreAdmin'
-import InsertStore from './StoreOwner/InsertStore'
 import Reviews from './StoreOwner/Reviews'
 import AvgRating from './StoreOwner/AvgRating'
 import Storelogin from './StoreOwner/Storelogin'
 import Storesignup from './StoreOwner/Storesignup'
-import StoreDetails from './pages/StoreDetails'
 import StoreProducts from './StoreOwner/StoreProducts'
+import UpdateStore from './StoreOwner/UpdateStore'
+import Storeshowproduct from './pages/Storeshowpro'
 function App() {
 
   return (
@@ -25,17 +25,19 @@ function App() {
                     <Route path="home" element={<Home/>}/>
                     <Route path="insert" element={<Inser/>}/>
                     <Route path="display" element={<Display/>}/>
-                    <Route path='storedetails/:id' element={<StoreDetails/>}/>
+                    <Route path='storeshowproduct/:id' element={<Storeshowproduct/>}/>
                     
              </Route>
         </Routes>
 
         <Routes>
              <Route path='storedashboard' element={<StoreAdmin/>} >
-                <Route path='insert' element={<InsertStore/>}/>
+                <Route path='updateStore' element={<UpdateStore/>}/>
                 <Route path='reviews' element={<Reviews/>}/>
                 <Route path='avgrating' element={<AvgRating/>}/>
                 <Route path='storeproducts' element={<StoreProducts/>}/>
+                
+               
              </Route>
         </Routes>
 

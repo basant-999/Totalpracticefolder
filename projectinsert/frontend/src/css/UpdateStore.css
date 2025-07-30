@@ -1,0 +1,52 @@
+.store-form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.store-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.store-form input,
+.store-form textarea {
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.store-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.store-form input[type="file"] {
+  border: none;
+}
+
+.store-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.store-form button:hover {
+  background-color: #218838;
+}

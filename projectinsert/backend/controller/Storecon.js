@@ -1,5 +1,5 @@
    const Storemodel = require("../model/Storemodel")
-   const Storeinsert = require("../model/Storeinsert")
+   const StoreProdctmodel = require("../model/storeproduct")
  const Storesignup=async(req,res)=>{
     //    console.log(req.body)
     const { ownerName, storeName, address,password,email}  = req.body
@@ -34,7 +34,7 @@ const Storelogin=async(req,res)=>{
          return res.status(400).send({msg:"invalid password"})
       }
 
-      res.status(200).send({msg:"you are login"})
+      res.status(200).send({msg:"you are login",data:data._id})
    } catch (error) {
     console.log(error)
    }
@@ -42,50 +42,119 @@ const Storelogin=async(req,res)=>{
 
 }
 
- const Insertstore=async(req,res)=>{
-      console.log(req.files,"file")
-      console.log(req.body,"body")
-      const{storename,location,variety} = req.body
-      const imagePaths = req.files.map(file => "storeimages/" + file.filename);
-      console.log(imagePaths);
-      try {
-             const result = await  Storeinsert.create({
-                   storename:storename,
-                  location:location,
-                  variety:variety,
-                  defaultimage:imagePaths[0],
-                  image:imagePaths
-           })
-
-           res.status(200).send({msg:"create strore",result})
-      } catch (error) {
-         console.log(error)
-      }
-    
- }
+ 
 
 
- const Getstoredata=async(req,res)=>{
-      try {
-         const respo = await Storeinsert.find()
-         // console.log(respo)
-         res.status(200).send(respo)
-      } catch (error) {
-         console.log(error)
-      }
- }
 
  const Storeproduct=async(req,res)=>{
    console.log(req.files)
    console.log(req.body)
-   res.send("bbbbbbbbbbbbbbbbbbbbb")
+   const {name,price,description,StoreId} = req.body
+   const imagePaths = req.files.map(file=>"productimages/"+file.filename)
+   console.log(imagePaths)
+   try {
+       const product = await StoreProdctmodel.create({
+           name:name,
+           price:price,
+           description:description,
+           image:imagePaths,
+            store_id:StoreId,
+       })
 
+       console.log(product);
+
+       await Storemodel.findByIdAndUpdate(StoreId,{StoreProducts:product._id})
+
+       res.send("bbbbbbbbbbbbbbbbbbbbb")
+   } catch (error) {
+      console.log(error)
+   }
+      //  res.send("bbbbbbbbbbbbbbbbbbbbb")
+
+   
  }
 
+  const Updatestoredata=async(req,res)=>{
+   // console.log(req.params.id);
+       try {
+         const id= req.params.id
+         const respo = await Storemodel.findOne({_id:id}).select("-StoreProducts -password")
+         console.log(respo);
+         res.send(respo);
+       } catch (error) {
+         
+       }
+      // res.send("okk");
+  }
+
+   const Finalstoreupdate=async(req,res)=>{
+      try {
+    console.log("BODY:", req.body);
+    console.log("FILES:", req.files);
+
+    const {
+      _id,
+      phone,
+      city,
+      state,
+      pincode,
+      category,
+      description,
+      email,
+      address,
+      storeName,
+      ownerName,
+    } = req.body;
+
+    // ✅ Safe: only update StoreImg if file uploaded
+    const updateData = {
+      ownerName,
+      storeName,
+      address,
+      email,
+      phone,
+      city,
+      state,
+      pincode,
+      category,
+      description,
+    };
+
+    if (req.files && req.files.length > 0) {
+      updateData.StoreImg = "storeimages/" + req.files[0].filename; // ✅ with folder
+    }
+
+    await Storemodel.findByIdAndUpdate(_id, updateData);
+
+    res.status(200).json({ message: "Store updated successfully" });
+  } catch (err) {
+    console.error("Update Error:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+   }
+
+   const Getstoredata=async(req,res)=>{
+      try {
+         const respo = await Storemodel.find()
+        //  console.log(respo)
+         res.status(200).send(respo)
+      } catch (error) {
+        console.log(error)
+      }
+
+   }
+
+   const GetStoreAllData=async(req,res)=>{
+      const id = req.params.id;
+      console.log(id);
+      res.send("okk");
+   }
  module.exports = {
     Storesignup,
     Storelogin,
-    Insertstore,
+    Storeproduct,
+    Updatestoredata,
+    Finalstoreupdate,
     Getstoredata,
-    Storeproduct
+    GetStoreAllData
  }

@@ -1,6 +1,7 @@
 
 import './App.css'
 import Home from './Home'
+import Prac2 from './prac2'
 import Practise from './Practise'
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
   return (
     <>
         {/* <Home/> */}
-        <Practise/>
+        {/* <Practise/> */}
+        <Prac2/>
     </>
   )
 }

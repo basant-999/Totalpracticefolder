@@ -1,58 +1,57 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Base_url from '../Base_url'
-import { Link } from 'react-router-dom'
-
+import Base_url from '../Base_url';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const [getstoredata,Setgetstoredata] = useState([])
-  const loaddata=async()=>{
-  
-    let api = `${Base_url}store/getstoredata`
-    try {
-       const respo = await axios.get(api)
-       console.log(respo.data)
-       Setgetstoredata(respo.data)
-    } catch (error) {
-      console.log(error)
-    }
+  const navigate = useNavigate()
+  const [getdata,Setmygetdata] = useState([])
+  const loadData=async()=>{
+          const api = `${Base_url}store/getstoredata`;
+          try {
+            const respo = await axios.get(api)
+            console.log(respo.data)
+            Setmygetdata(respo.data)
+          } catch (error) {
+            console.log(error)
+          }
+    
   }
 
   useEffect(()=>{
-     loaddata()
+    loadData()
   },[])
 
-  const ans = getstoredata.map((store)=>{
-      console.log("Image path:", store.defaultimage);
-    return(<>
-       <div className="col-md-4 mb-4">
-  <div className="card shadow-sm">
-    <img
-      src={`${Base_url}${store.defaultimage}`} // ✅ backend se image path
-      className="card-img-top"
-      alt={store.storename}
-      style={{ height: "200px", objectFit: "cover" }}
-    />
-    <div className="card-body">
-      <h5 className="card-title">{store.storename}</h5>
-      <p className="card-text"><strong>Location:</strong> {store.location}</p>
-      <p className="card-text"><strong>Variety:</strong> {store.variety}</p>
-      <Link to={`/storedetails/${store._id}`} className="btn btn-primary w-100">view store</Link>
-    </div>
+  const ans = getdata.map((key)=>{
+      return(
+        <>
+           <div className="card m-3" style={{ width: '22rem' }} onClick={()=>{navigate(`/storeshowproduct/${key._id}`)}}>
+  <img
+    src={`${Base_url}${key.StoreImg}`}
+    className="card-img-top"
+    alt={key.storeName}
+  />
+  <div className="card-body" >
+    <h5 className="card-title">{key.storeName}</h5>
+    <h6 className="card-subtitle mb-2 text-muted">{key.email}</h6>
+    <p className="card-text">
+      <strong>Address:</strong> {key.address}
+    </p>
+    <p className="card-text">
+      <strong>Rating:</strong> ⭐
+    </p>
+    <button className="btn btn-primary">open</button>
   </div>
 </div>
-        
-    </>)
+
+           
+        </>
+      )
   })
   return (
-   <>
-     <div className="container mt-4">
-    <div className="row">
-      {ans}
-    </div>
-  </div>
-     
-   </>
+       <>
+          {ans}
+       </>
   )
 }
 

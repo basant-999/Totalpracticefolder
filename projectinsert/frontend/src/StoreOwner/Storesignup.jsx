@@ -27,13 +27,13 @@ const Storesignup = () => {
           const respo  = await axios.post(api,input)
           // console.log(respo.data)
           alert(respo.data.msg)
-          Setinput({
-             ownerName:"",
-              storeName:"",
-              address:"",
-              password:"",
-              email:""
-          })
+          // Setinput({
+          //    ownerName:"",
+          //     storeName:"",
+          //     address:"",
+          //     password:"",
+          //     email:""
+          // })
          } catch (error) {
           console.log(error)
          }

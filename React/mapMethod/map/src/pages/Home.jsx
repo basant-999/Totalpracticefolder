@@ -62,6 +62,7 @@ const Home = () => {
     <table>
             <thead>
                 <tr>
+                     <th>sn</th>
                     <th>city</th>
                     <th>email</th>
                     <th>password</th>
@@ -69,10 +70,11 @@ const Home = () => {
                  </tr>
             </thead>
             <tbody>
-              {bk.map((key)=>{
+              {bk.map((key,index)=>{
                 return(
                     <>
                     <tr>
+                        <td>{index+1}</td>
                     <td>{key.city}</td>
                     <td>{key.email}</td>
                     <td>{key.password}</td>

@@ -15,13 +15,13 @@ const Usersignup=async(req,res)=>{
                     address: address,
                     email: email,
                     password: hashpassword
-        })
-        res.status(200).send({msg:"sucfuuly login"})
-    } catch (error) {
-        console.log("server error")
-    }
-   
-}
+                })
+                res.status(200).send({msg:"sucfuuly login"})
+            } catch (error) {
+                console.log("server error")
+            }
+        
+        }
 
 const Userlogin=async(req,res)=>{
     // console.log(req.body)
