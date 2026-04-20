@@ -10,8 +10,7 @@ const Home = () => {
           console.log(input)
      }
      const finalsub=()=>{
-         
-
+       
      }
   return (
      <form>

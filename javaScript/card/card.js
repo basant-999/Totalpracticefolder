@@ -22,12 +22,12 @@ const cartitems=[];
 const addcar=(key)=>{
     const item = JSON.parse(key);
     const checkitem = cartitems.find(key=>key.name == item.name);
-    // console.log(checkitem);
+    console.log(checkitem);
     if(!checkitem){
         cartitems.push(item);
     }
     else{
-        // checkitem.qty +=1;
+        checkitem.qty +=1;
         alert("already add")
     }
     console.log(cartitems);
@@ -74,7 +74,7 @@ const refCart=()=>{
 
 
 let selectdiv = document.querySelector("#orkuchh")
-// console.log(selectdiv)
+console.log(selectdiv)
 
  selectdiv.innerHTML = bk.map((key)=>
      `<div>
@@ -86,4 +86,9 @@ let selectdiv = document.querySelector("#orkuchh")
     </div>`
 ).join(" ")
 
-// console.log(bk)
+console.log(bk)
+
+// ===================================practices --===============
+
+
+

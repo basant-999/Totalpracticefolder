@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+
+
+/* index.css / globals.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.english-text {
+    font-weight: 400;        
+    font-style: regular;    
+    font-size: 14px;        
+    line-height: 20px;      
+    letter-spacing: 0%;     
+    color:rgba(44, 44, 44, 1);         
+  }
+
+
+

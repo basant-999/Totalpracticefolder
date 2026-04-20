@@ -16,6 +16,25 @@
 //     console.log(err)
 // })
 
+
+function data(val){
+       return new Promise ((resolve , reject )=>{
+              setTimeout(()=>{
+                   if(val){
+                    console.log("done!!!!!")
+                   }else{
+                     console.log("sorr!!!!")
+                   }
+              })
+       })
+}
+
+data().then((msg)=>{
+     console.log(msg)
+}).catch((err)=>{
+     console.log(err)
+})
+
 //=======================without para meter
 
 function greet(){

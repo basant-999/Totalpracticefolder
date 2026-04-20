@@ -25,14 +25,29 @@ let obj = [
 ];
 
 
-let select = document.querySelector("#output")
-select.innerHTML = obj.map((e)=>`
-      <tr>
-    <td>${e.id}</td>
-     <tr><img width="100" src="${e.img}"><tr/>
-    <td>${e.course}</td>
-    <td>${e.name}</td>
-    <td>${e.mobno}</td>
-      </tr>
+// let select = document.querySelector("#output")
+// select.innerHTML = obj.map((e)=>`
+//       <tr>
+//     <td>${e.id}</td>
+//      <tr><img width="100" src="${e.img}"><tr/>
+//     <td>${e.course}</td>
+//     <td>${e.name}</td>
+//     <td>${e.mobno}</td>
+//       </tr>
 
+// `).join(" ")
+
+
+let sekect = document.getElementById("output")
+console.log(sekect)
+
+sekect.innerHTML = obj.map((key)=>`
+    <tr>
+    
+    
+      <td> <img src="${key.img} width="100" height="100"</td>
+        <td>${key.course}</td>
+    <td>${key.name}</td>
+   <td>${key.mobno}</td>
+    </tr>
 `).join(" ")

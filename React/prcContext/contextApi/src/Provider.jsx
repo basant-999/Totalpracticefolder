@@ -10,7 +10,6 @@ const Provider =({children})=>{
     } 
     return(
         <Usercontext.Provider value={{user,logout,log,setlog}}>
-
           {children}
         </Usercontext.Provider>
     )

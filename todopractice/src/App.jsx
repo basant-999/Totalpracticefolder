@@ -4,6 +4,7 @@ import { useState } from 'react'
 import './App.css'
 import axios from "axios"
 import { useEffect } from 'react'
+import Practice from './Practice'
 
 function App() {
   const [input,Setmyinput] = useState({
@@ -12,6 +13,7 @@ function App() {
   const [getmydata,Setgetmydata] = useState([])
   const [editid,Seteditid] = useState()
     const handlesubmit=(e)=>{
+      
            let name= e.target.name
            let value=e.target.value
 
@@ -162,6 +164,10 @@ function App() {
       <hr />
       <h3>Task List:</h3>
       {ans}
+
+{/*     practice   */}
+
+      <Practice/>
     </>
   )
 }
